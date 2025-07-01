@@ -1,8 +1,8 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import { PrismaClient } from "@prisma/client";
-import identityRoutes from "./routes/identity.js";
+import identifyRoutes from "./routes/identify.js";
 dotenv.config();
 
 export const prisma = new PrismaClient();
@@ -13,7 +13,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 const PORT = process.env.PORT || 3000;
-app.use("/", identityRoutes);
+app.get("/", (req:Request, res:Response) => {
+    res.status(404).json("Welcome to the API");
+});
+
+app.use("/identify", identifyRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
