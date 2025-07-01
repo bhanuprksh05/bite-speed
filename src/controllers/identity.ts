@@ -98,7 +98,7 @@ export const updateIdentity = async (req: Request, res: Response) => {
         let firstLastContact = await awaitInsertTillTail(contactData[0],emails,phoneNumbers,secondaryContactIds);
         let secondLastContact = await awaitInsertTillTail(contactData[1],emails,phoneNumbers,secondaryContactIds);
 
-        let primaryContactId;
+        let primaryContactId = firstPrimaryContact.id;
         if(firstPrimaryContact.id !== secondPrimaryContact.id){
             if(firstPrimaryContact.createdAt > secondPrimaryContact.createdAt){
                 primaryContactId = secondPrimaryContact.id;
